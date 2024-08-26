@@ -18,7 +18,7 @@ void EventListener::initialize()
 {
     this->listener_thread_ = nullptr;
     this->event_ = new sf::Event;
-    this->event_handlers_ = new std::map<sf::Event::EventType, std::vector<std::function<void()>>>; 
+    this->event_handlers_ = new std::map<sf::Event::EventType, std::vector<const std::function<void()>>>; 
 }
 
 bool EventListener::is_event_type_listens(sf::Event::EventType event_type) const
@@ -29,10 +29,10 @@ bool EventListener::is_event_type_listens(sf::Event::EventType event_type) const
 
 void EventListener::bind(sf::Event::EventType event_type, const std::function<void()>& callback)
 {
-    std::vector<std::function<void()>>* callbacks_ptr;
+    std::vector<const std::function<void()>>* callbacks_ptr;
     if(!this->is_event_type_listens(event_type))
     {
-        callbacks_ptr = new std::vector<std::function<void()>> {callback};
+        callbacks_ptr = new std::vector<const std::function<void()>> {callback};
         this->event_handlers_->insert({event_type, *callbacks_ptr});
         return;
     }
@@ -54,7 +54,7 @@ void EventListener::unbind(sf::Event::EventType event_type, const std::function<
 {
     if(!this->is_event_type_listens(event_type)) return;
     
-    std::vector<std::function<void()>>* callbacks_ptr = &this->event_handlers_->find(event_type)->second;
+    std::vector<const std::function<void()>>* callbacks_ptr = &this->event_handlers_->find(event_type)->second;
     std::function<bool(std::function<void()>)> are_functions_equal = [callback, this](const std::function<void()>& fn)->bool
     {
   

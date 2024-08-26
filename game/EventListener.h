@@ -11,14 +11,14 @@ class EventListener
 {
 public:
     EventListener();
-    ~EventListener();
+    virtual ~EventListener();
     void bind(sf::Event::EventType event_type, const std::function<void()>& callback);
     void unbind(sf::Event::EventType event_type);
     void unbind(sf::Event::EventType event_type, const std::function<void()>& callback);
 private:
     std::thread* listener_thread_;
     sf::Event* event_;
-    std::map<sf::Event::EventType, std::vector<std::function<void()>>>* event_handlers_;
+    std::map<sf::Event::EventType, std::vector<const std::function<void()>>>* event_handlers_;
     
     void initialize();
     void check_events();
