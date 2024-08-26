@@ -21,7 +21,7 @@ void EventListener::initialize()
     this->event_handlers_ = new std::map<sf::Event::EventType, std::vector<std::function<void()>>>; 
 }
 
-bool EventListener::is_event_type_listens(sf::Event::EventType event_type)
+bool EventListener::is_event_type_listens(sf::Event::EventType event_type) const
 {
     return this -> event_handlers_ -> count(event_type) != 0;
 }

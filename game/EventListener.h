@@ -22,7 +22,7 @@ private:
     
     void initialize();
     void check_events();
-    bool is_event_type_listens(sf::Event::EventType);
+    bool is_event_type_listens(sf::Event::EventType) const;
     template<typename T, typename... U>
     size_t getAddress(std::function<T(U...)> f) {
         typedef T(fnType)(U...);
