@@ -27,7 +27,7 @@ bool EventListener::is_event_type_listens(sf::Event::EventType event_type) const
 }
 
 
-void EventListener::bind(sf::Event::EventType event_type, const std::function<void()>& callback) const
+void EventListener::bind(sf::Event::EventType event_type, const std::function<void()>& callback)
 {
     std::vector<std::function<void()>>* callbacks_ptr;
     if(!this->is_event_type_listens(event_type))
@@ -40,7 +40,7 @@ void EventListener::bind(sf::Event::EventType event_type, const std::function<vo
     callbacks_ptr->push_back(callback);
 }
 
-void EventListener::unbind(sf::Event::EventType event_type) const
+void EventListener::unbind(sf::Event::EventType event_type)
 {
     if(!this->is_event_type_listens(event_type))
         return;
