@@ -12,8 +12,8 @@ class EventListener
 public:
     EventListener();
     ~EventListener();
-    void bind(sf::Event::EventType event_type, const std::function<void()>& callback);
-    void unbind(sf::Event::EventType event_type);
+    void bind(sf::Event::EventType event_type, const std::function<void()>& callback) const;
+    void unbind(sf::Event::EventType event_type) const;
     void unbind(sf::Event::EventType event_type, const std::function<void()>& callback);
 private:
     std::thread* listener_thread_;
